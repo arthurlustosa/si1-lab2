@@ -1,18 +1,42 @@
 package models;
 
-public class Anuncio {
+import javax.persistence.*;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Anuncio implements Comparable<Anuncio>{
+	@Id
+    @GeneratedValue
 	private Long id;
+	@Column
 	private String descricao;
+	@Column
 	private String titulo;
+	@Column
 	private String cidade;
+	@Column
 	private String bairro;
+	@Column
 	private String instrumentos;
+	@Column
 	private String estilosBanidos;
+	@Column
 	private String estilos;
+	@Column
 	private String contatos;
+	@Column
 	private String interesses;
+    @Temporal(TemporalType.DATE)
+    private Date data = new Date();
 
+    public Anuncio(){
+    	
+    }
+	
 	public Anuncio(String titulo, String descricao, String cidade,
 			String bairro, String instrumentos, String estilos,
 			String estilosBanidos, String contatos, String interesses)
@@ -37,6 +61,14 @@ public class Anuncio {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Date getData(){
+		return data;
+	}
+	
+	public void setData(Date data){
+		this.data = data;
 	}
 
 	public String getDescricao() {
@@ -142,6 +174,12 @@ public class Anuncio {
 			throw new Exception(
 					"Os interesses nao podem ser invalidos para criacao de um anuncio");
 		}
+	}
+
+	@Override
+	public int compareTo(Anuncio o) {
+        return getData().compareTo(o.getData()) * (-1);
+
 	}
 
 }
