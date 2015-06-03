@@ -3,9 +3,12 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-GET		/anuncios					controllers.Application.anuncios()
 
+
+GET         /                               controllers.Application.index()
+GET         /anuncios                       controllers.Application.anuncios()
+POST        /novoAnuncio                       controllers.Application.novoAnuncio()
+POST        /anuncios/:codigo/:id/delete    controllers.Application.finalizaAnuncio(codigo: String, id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

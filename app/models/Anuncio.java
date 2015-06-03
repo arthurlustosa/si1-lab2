@@ -41,7 +41,7 @@ public class Anuncio implements Comparable<Anuncio>{
 			String bairro, String instrumentos, String estilos,
 			String estilosBanidos, String contatos, String interesses)
 			throws Exception {
-		validaParametros(titulo, descricao, cidade, bairro, instrumentos,
+		verificaValidadeDosParametros(titulo, descricao, cidade, bairro, instrumentos,
 				contatos, interesses);
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -143,7 +143,7 @@ public class Anuncio implements Comparable<Anuncio>{
 		this.interesses = interesses;
 	}
 
-	private void validaParametros(String titulo, String descricao,
+	private void verificaValidadeDosParametros(String titulo, String descricao,
 			String cidade, String bairro, String instrumentos, String contatos,
 			String interesses) throws Exception {
 		if (titulo == null || titulo.equals("")) {

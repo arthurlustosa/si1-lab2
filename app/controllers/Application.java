@@ -30,11 +30,52 @@ public class Application extends Controller {
     }
 
 	public static Result anuncios() {
-		List<Anuncio> resultado = DAO.findAllByClass(Anuncio.class);
-		Collections.sort(resultado);
+		List<Anuncio> result = DAO.findAllByClass(Anuncio.class);
+		Collections.sort(result);
+		
+		//return ok(views.html.index.render(result));
 
-		return ok(index.render(resultado, false, anunciosFinalizados));
+		return ok(views.html.index.render(result, false, anunciosFinalizados));
 	}
+	
+
+    @Transactional
+    public static Result novoAnuncio() {
+        Form<Anuncio> formPreenchido = form.bindFromRequest();
+
+        if (formPreenchido.hasErrors()) {
+            List<Anuncio> resultado = DAO.findAllByClass(Anuncio.class);
+            Collections.sort(resultado);
+
+            return badRequest(index.render(resultado, false, anunciosFinalizados));
+        } else {
+            Anuncio newAnuncio = formPreenchido.get();
+
+            DAO.persist(newAnuncio);
+            DAO.flush();
+
+            return anuncios();
+        }
+    }
+
+    @Transactional
+    public static Result finalizaAnuncio(String codigo, Long id) {
+        Form<String> formFinalizarPreenchido = formFinalizar.bindFromRequest();
+        String codigoForm = formFinalizarPreenchido.data().get("finalizar");
+
+        if (codigoForm.equals(codigo)) {
+            DAO.removeById(Anuncio.class, id);
+            DAO.flush();
+
+            anunciosFinalizados++;
+            return anuncios();
+        } else {
+            List<Anuncio> resultado = DAO.findAllByClass(Anuncio.class);
+            Collections.sort(resultado);
+
+            return ok(index.render(resultado, true, anunciosFinalizados));
+        }
+    }
 
 
    
