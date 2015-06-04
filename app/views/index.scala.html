@@ -2,46 +2,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
+    <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ADS Music CG</title>
+    <title>Fun Music</title>
     <link rel="shortcut icon" href="@routes.Assets.at("images/favicon.png")">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="@routes.Assets.at("stylesheets/index.css")"/>
-</head>
+    </head>
 
 <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-     <div class="container">
-          <!-- Brand and toggle get grouped for better mobile display -->
-         <div class="navbar-header">
-
-                <div class="input-group" style="max-width: 470px">
-                    <a class="navbar-brand" style="color: white" href="index.html">ADS Music CG</a>
-                </div>
-             <form class="navbar-form pull-left" center>
-                <input id="busca" title="Separe os termos com vírgulas." type="text" class="form-control" style="max-width: 470px" placeholder="Encontre seu anúncio aqui!"
-                    name="srch-term"
-                    id="srch-term">
-
-
-                    <div class="input-group-btn">
-                        <button class="btn btn-default btn-primary" style="margin-left: 0px" type="submit" style="color: #07ddc0"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-
-                 <a style="margin-left: 0px" class="navbar-btn btn btn-default btn-plus" data-toggle="modal"
-                    data-target="#formModal"><i class="glyphicon glyphicon-plus" style="color: #07ddc0"></i>
-                     Anunciar </a>
-
-             </form>
-         </div>
-        </div>
-
-    </div>
-
-    </nav>
 
     <div class="modal fade" id="formModal">
         <div class="modal-dialog">
@@ -54,7 +25,7 @@
                 <div class="modal-body">
                     <form action="@routes.Application.novoAnuncio()" method="POST">
                         <div class="form-group">
-                            <label for="inputTitulo">Título</label>
+                            <label for="inputTitulo">Nome</label>
                             <input name="titulo" type="text" class="form-control" id="inputTitulo" placeholder="Meu anúncio" required pattern=".*\S+.*">
                         </div>
 
@@ -91,7 +62,7 @@
                         <div class="form-group">
                             <label for="inputContatos">Contatos</label>
                             <input name="contatos" type="text" class="form-control" id="inputContatos" placeholder="anunciante at outlook.com / instagram/anunciante"
-                                   required pattern=".*\S+.*">
+                            required pattern=".*\S+.*">
                         </div>
 
                         <div class="form-group">
@@ -123,78 +94,155 @@
         </div>
     </div>
 
+    <!-- Barra horizontal -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
 
-    <div class="container" id="main">
-        @if(erro) {
-        <div id="erroAlerta" class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            O código que você inseriu está incorreto.
+            <div class="input-group" style="max-width: 470px">
+                <a class="navbar-brand" style="color: white" href="index.html">Fun Music</a>
+            </div>
+
         </div>
-        }
+            <!-- /.container -->
+    </nav>
 
-        <div id="anuncios" class="row">
+    <div class="navbar navbar-default" id="subnav">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="row">
+                    <h4>Anuncie Aqui</h4>
 
-            @for(anuncio <- anuncios) {
-            <div class="col-md-4 col-sm-6 anuncio">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><a href="" data-toggle="modal" data-target="#finalizarModal" class="pull-right finalizarAnuncio">Finalizar</a> <h4
-                            class="anuncioTitulo">@anuncio.getTitulo()</h4></div>
-                    <div class="panel-body">
-                        <p>@anuncio.getDescricao()</p>
-                        <div class="clearfix"></div>
-                        <hr>
 
-                        <p><strong>Cidade:</strong> @anuncio.getCidade()</p>
-                        <p><strong>Bairro:</strong> @anuncio.getBairro()</p>
-
-                        <p class="anuncioInstrumentos"><strong>Instrumentos:</strong> @anuncio.getInstrumentos()</p>
-                        @if(!anuncio.isEstilosEmpty) {
-                        <p class="anuncioEstilos"><strong>Estilos que gosta:</strong> @anuncio.getEstilos()</p>
-                        }
-                        @if(!anuncio.isEstilosBanidosEmpty) {
-                        <p><strong>Estilos que não gosta:</strong> @anuncio.getEstilosBanidos()</p>
-                        }
-
-                        <p><strong>Contatos:</strong> @anuncio.getContatos()</p>
-                        <p class="anuncioInteresse"><strong>Interesse:</strong> @anuncio.getInteresse()</p>
-
-                        <hr>
-
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Faça uma pergunta">
-                        </div>
-
+                    <div class="input-group-btn">
+                        <input id="busca" title="Separe os termos com vírgulas." type="text" class="form-control" style="max-width: 470px" placeholder="Encontre seu anúncio aqui!"
+                        name="srch-term"
+                        id="srch-term">
+                        <button class="btn btn-default btn-primary" style="margin-left: 0px" type="submit" style="color: #07ddc0"><i class="glyphicon glyphicon-search"></i></button>
                     </div>
-                </div>
-            </div>
 
-            <div class="modal fade" id="finalizarModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Insira o código do seu anúncio</h4>
-                        </div>
 
-                        <div class="modal-body">
-                            <form action="@routes.Application.finalizaAnuncio(anuncio.getCodigo(), anuncio.getId())" method="POST">
-                                <div class="form-group">
-                                    <input name="finalizar" type="text" class="form-control" id="inputFinalizar" placeholder="Código do seu anúncio" required pattern=".*\S+.*">
-                                </div>
 
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-                            </form>
-                        </div>
+                    <div class="nav-center">
+                        <h4>FunMusic - @finalizados Anúncio(s) finalizado(s)</h4>
                     </div>
-                </div>
+
+
             </div>
-            }
 
         </div>
     </div>
+
+            <!-- Blog Sidebar Widgets Column -->
+
+        <div class="navbar-header">
+
+            <a style="margin-left: 15px" class="navbar-btn btn btn-default btn-plus" data-toggle="modal"
+            data-target="#formModal"><i class="glyphicon glyphicon-plus" style="color: #dd1111"></i>
+                Anunciar </a>
+
+        </div>
+
+
+        <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+                <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+                <div class="container" id="main">
+                    @if(erro) {
+                        <div id="erroAlerta" class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            O código que você inseriu está incorreto.
+                        </div>
+                    }
+
+                    <div id="anuncios" class="row">
+
+                    @for(anuncio <- anuncios) {
+                        <div class="col-md-4 col-sm-6 anuncio">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><a href="" data-toggle="modal" data-target="#finalizarModal" class="pull-right finalizarAnuncio">Finalizar</a> <h4
+                                class="anuncioTitulo">@anuncio.getTitulo()</h4></div>
+                                <div class="panel-body">
+                                    <p>@anuncio.getDescricao()</p>
+                                    <div class="clearfix"></div>
+                                    <hr>
+
+                                    <p><strong>Cidade:</strong> @anuncio.getCidade()</p>
+                                    <p><strong>Bairro:</strong> @anuncio.getBairro()</p>
+
+                                    <p class="anuncioInstrumentos"><strong>Instrumentos:</strong> @anuncio.getInstrumentos()</p>
+                                    @if(!anuncio.isEstilosEmpty) {
+                                        <p class="anuncioEstilos"><strong>Estilos que gosta:</strong> @anuncio.getEstilos()</p>
+                                    }
+                                    @if(!anuncio.isEstilosBanidosEmpty) {
+                                        <p><strong>Estilos que não gosta:</strong> @anuncio.getEstilosBanidos()</p>
+                                    }
+
+                                    <p><strong>Contatos:</strong> @anuncio.getContatos()</p>
+                                    <p class="anuncioInteresse"><strong>Interesse:</strong> @anuncio.getInteresses()</p>
+
+                                    <hr>
+
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default"><i class="glyphicon glyphicon-share"></i></button>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Faça uma pergunta">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="finalizarModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Insira o código do seu anúncio</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <form action="@routes.Application.finalizaAnuncio(anuncio.getCodigo(), anuncio.getId())" method="POST">
+                                            <div class="form-group">
+                                                <input name="finalizar" type="text" class="form-control" id="inputFinalizar" placeholder="Código do seu anúncio" required pattern=".*\S+.*">
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Enviar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+            <!-- /.row -->
+        <hr>
+
+    </div>
+        <!-- /.container -->
+
+        <!-- Page Content -->
+    <div class="container">
+        <footer class="footer">
+            <hr>
+            <p align="center">&copy; Arthur Lustosa - Projeto desenvolvido para a disciplina de SI1</p>
+            <hr>
+        </footer>
+
+    </div>
+
+
+
+
 
 
 

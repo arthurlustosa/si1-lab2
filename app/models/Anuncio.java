@@ -29,6 +29,8 @@ public class Anuncio implements Comparable<Anuncio>{
 	@Column
 	private String contatos;
 	@Column
+	private String codigo;
+	@Column
 	private String interesses;
     @Temporal(TemporalType.DATE)
     private Date data = new Date();
@@ -39,10 +41,10 @@ public class Anuncio implements Comparable<Anuncio>{
 	
 	public Anuncio(String titulo, String descricao, String cidade,
 			String bairro, String instrumentos, String estilos,
-			String estilosBanidos, String contatos, String interesses)
+			String estilosBanidos, String contatos, String interesses, String codigo)
 			throws Exception {
 		verificaValidadeDosParametros(titulo, descricao, cidade, bairro, instrumentos,
-				contatos, interesses);
+				contatos, interesses, codigo);
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.cidade = cidade;
@@ -52,6 +54,7 @@ public class Anuncio implements Comparable<Anuncio>{
 		this.estilosBanidos = estilosBanidos;
 		this.contatos = contatos;
 		this.interesses = interesses;
+		this.codigo = codigo;
 
 	}
 
@@ -103,6 +106,14 @@ public class Anuncio implements Comparable<Anuncio>{
 		this.bairro = bairro;
 	}
 
+ 	public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
 	public String getInstrumentos() {
 		return instrumentos;
 	}
@@ -143,9 +154,16 @@ public class Anuncio implements Comparable<Anuncio>{
 		this.interesses = interesses;
 	}
 
+ 	public boolean isEstilosEmpty() {
+        return this.estilos.length() == 0;
+    }
+
+    public boolean isEstilosBanidosEmpty() {
+        return this.estilosBanidos.length() == 0;
+    }
 	private void verificaValidadeDosParametros(String titulo, String descricao,
 			String cidade, String bairro, String instrumentos, String contatos,
-			String interesses) throws Exception {
+			String interesses, String codigo) throws Exception {
 		if (titulo == null || titulo.equals("")) {
 			throw new Exception(
 					"O titulo nao pode ser nulo ou vazio para criacao de um anuncio");

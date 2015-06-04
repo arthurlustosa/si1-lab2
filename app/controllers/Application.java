@@ -12,32 +12,24 @@ import views.html.index;
 import java.util.Collections;
 import java.util.List;
 
-import play.*;
-import play.mvc.*;
-
-import views.html.*;
-
-
 public class Application extends Controller {
     private static final GenericDAO DAO = new GenericDAO();
-    private static Form<Anuncio> formAnuncios = Form.form(Anuncio.class);
-    private static Form<String> formFinal = Form.form(String.class);
+    private static Form<Anuncio> form = Form.form(Anuncio.class);
+    private static Form<String> formFinalizar = Form.form(String.class);
     private static int anunciosFinalizados = 0;
 
     @Transactional
-	public static Result index() {
-		return anuncios();
+    public static Result index() {
+        return anuncios();
     }
 
-	public static Result anuncios() {
-		List<Anuncio> result = DAO.findAllByClass(Anuncio.class);
-		Collections.sort(result);
-		
-		//return ok(views.html.index.render(result));
+    @Transactional
+    public static Result anuncios() {
+        List<Anuncio> resultado = DAO.findAllByClass(Anuncio.class);
+        Collections.sort(resultado);
 
-		return ok(views.html.index.render(result, false, anunciosFinalizados));
-	}
-	
+        return ok(index.render(resultado, false, anunciosFinalizados));
+    }
 
     @Transactional
     public static Result novoAnuncio() {
@@ -77,7 +69,4 @@ public class Application extends Controller {
         }
     }
 
-
-   
 }
-
