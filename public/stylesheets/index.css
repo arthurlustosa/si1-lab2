@@ -27,7 +27,7 @@ author: bootply.com
 */
 
 body {
-    background-color: #e0e0e0;
+    background-color: #c6b767;
     -webkit-font-smoothing: antialiased;
     font: normal 14px Roboto, arial, sans-serif;
 }
@@ -43,7 +43,7 @@ body {
     border: 0 solid #4285f4;
     border-bottom-width: 2px;
     font-weight: 800;
-    background-color: transparent;
+    background-color: #ffef8b;
 }
 
 .navbar-default .dropdown-menu {
@@ -186,6 +186,7 @@ h3, h4, h5 {
 
 /* template layout*/
 #subnav {
+    backgound-color: #f4f4f4;
     position: fixed;
     width: 100%;
 }
