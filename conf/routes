@@ -7,7 +7,7 @@
 
 GET         /                               controllers.Application.index()
 GET         /anuncios                       controllers.Application.anuncios()
-POST        /novoAnuncio                       controllers.Application.novoAnuncio()
+POST        /anuncios                       controllers.Application.novoAnuncio()
 POST        /anuncios/:codigo/:id/delete    controllers.Application.finalizaAnuncio(codigo: String, id: Long)
 
 
